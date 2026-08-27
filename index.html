@@ -1,190 +1,199 @@
-/* Общий фон страницы под темное дерево */
-body {
-    background-color: #1a1714;
-    color: #2b231d;
-    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Темпест - Интерактивная книга</title>
+    <style>
+        body {
+            background-color: #1a1714;
+            color: #2b231d;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Скрываем стандартную боковую панель Twine */
-#ui-bar {
-    display: none !important;
-}
+        .book-spread {
+            position: relative;
+            width: 1100px;
+            height: 680px;
+            background: #e8dcc4;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(110, 85, 55, 0.3);
+            border-radius: 4px;
+            display: flex;
+            box-sizing: border-box;
+            padding: 40px 50px;
+            border: 3px solid #3c2f25;
+        }
 
-#passages {
-    border: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-}
+        .book-spread::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            bottom: 20px;
+            width: 40px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.15));
+            pointer-events: none;
+            z-index: 10;
+        }
 
-/* Контейнер книги (двойной разворот) */
-.book-spread {
-    position: relative;
-    width: 1100px;
-    height: 680px;
-    background: #e8dcc4 url('https://i.imgur.com/7123456.jpg') repeat; /* Текстура пергамента */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(110, 85, 55, 0.3);
-    border-radius: 4px;
-    display: flex;
-    box-sizing: border-box;
-    padding: 40px 50px;
-    border: 3px solid #3c2f25;
-}
+        .book-page-left, .book-page-right {
+            flex: 1;
+            padding: 20px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
 
-/* Эффект корешка книги посередине */
-.book-spread::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 20px;
-    bottom: 20px;
-    width: 40px;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.15));
-    pointer-events: none;
-    z-index: 10;
-}
+        .book-page-left {
+            border-right: 1px solid rgba(139, 115, 85, 0.4);
+            padding-right: 45px;
+        }
 
-/* Левая и правая страницы */
-.book-page-left, .book-page-right {
-    flex: 1;
-    padding: 20px 35px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
+        .book-page-right {
+            padding-left: 45px;
+            align-items: center;
+            justify-content: center;
+        }
 
-.book-page-left {
-    border-right: 1px solid rgba(139, 115, 85, 0.4);
-    padding-right: 45px;
-}
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #6b5b4e;
+            letter-spacing: 2px;
+        }
 
-.book-page-right {
-    padding-left: 45px;
-    align-items: center;
-    justify-content: center;
-}
+        .book-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #2b231d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
 
-/* Нумерация страниц и заголовки */
-.page-number {
-    text-align: center;
-    font-size: 14px;
-    color: #6b5b4e;
-    letter-spacing: 2px;
-}
+        .speaker-icon {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #5c4938;
+        }
 
-.book-title {
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #2b231d;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
+        .story-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2b231d;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
 
-.speaker-icon {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #5c4938;
-}
+        .choices-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
 
-/* Текст истории */
-.story-text {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #2b231d;
-    text-align: justify;
-    margin-bottom: 20px;
-}
+        .choices-box a {
+            display: block;
+            background: #d4c4a8;
+            border: 1px solid #5c4938;
+            padding: 10px 15px;
+            color: #2b231d;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
 
-/* Иллюстрация в рамочке на правой странице */
-.illustration-frame {
-    border: 8px solid #2b231d;
-    padding: 4px;
-    background: #111;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    max-width: 380px;
-}
+        .choices-box a:hover {
+            background: #2b231d;
+            color: #f4ecd8;
+            border-color: #111;
+        }
 
-.illustration-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: sepia(30%) contrast(110%);
-}
+        .side-badges-left, .side-badges-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 20;
+        }
 
-/* Выборы (кнопки) */
-.choices-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: auto;
-}
+        .side-badges-left { left: -65px; }
+        .side-badges-right { right: -65px; }
 
-.choices-box a {
-    display: block;
-    background: #d4c4a8;
-    border: 1px solid #5c4938;
-    padding: 10px 15px;
-    color: #2b231d;
-    text-decoration: none;
-    text-align: center;
-    font-size: 16px;
-    transition: all 0.2s ease;
-    border-radius: 2px;
-}
+        .badge-item {
+            width: 50px;
+            height: 50px;
+            background: #2b231d;
+            border: 2px solid #c5b395;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #e8dcc4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            font-size: 12px;
+        }
 
-.choices-box a:hover {
-    background: #2b231d;
-    color: #f4ecd8;
-    border-color: #111;
-}
+        .badge-item span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-/* Боковые панели со счётчиками (левая и правая стороны) */
-.side-badges-left, .side-badges-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 20;
-}
+<div class="side-badges-left">
+    <div class="badge-item" title="Стержень">⚖️ <span>0</span></div>
+    <div class="badge-item" title="Дух">✨ <span>0</span></div>
+    <div class="badge-item" title="Тьма">🌑 <span>0</span></div>
+</div>
 
-.side-badges-left {
-    left: -65px;
-}
+<div class="side-badges-right">
+    <div class="badge-item" title="Настройки">⚙️</div>
+    <div class="badge-item" title="Инвентарь">📜</div>
+</div>
 
-.side-badges-right {
-    right: -65px;
-}
+<div class="book-spread">
+    <div class="book-page-left">
+        <div class="page-number">1132</div>
+        <div>
+            <div class="book-title">Темпест</div>
+            <div class="speaker-icon">❖ Корнелий Темпест ❖</div>
+            <div class="story-text">
+                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>
+                У тебя иная судьба.
+            </div>
+        </div>
+        
+        <div class="choices-box">
+            <a href="#">Принять свою ношу (Путь Стержня)</a>
+            <a href="#">Уповать на высший смысл (Путь Духа)</a>
+            <a href="#">Отвергнуть этот мир (Путь Тьмы)</a>
+        </div>
+    </div>
 
-.badge-item {
-    width: 50px;
-    height: 50px;
-    background: #2b231d;
-    border: 2px solid #c5b395;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #e8dcc4;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    cursor: pointer;
-    font-size: 12px;
-}
+    <div class="book-page-right">
+        <div style="border: 8px solid #2b231d; padding: 4px; background: #111; max-width: 380px;">
+            <div style="width: 350px; height: 450px; background: #33261d; display: flex; align-items: center; justify-content: center; color: #a38f75; text-align: center; font-style: italic; padding: 20px;">
+                [ Место для иллюстрации-гравюры ]
+            </div>
+        </div>
+    </div>
+</div>
 
-.badge-item span {
-    font-size: 14px;
-    font-weight: bold;
-}
+</body>
+</html>
