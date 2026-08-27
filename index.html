@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0b0f0b;
+            background-color: #080c08;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -16,37 +16,46 @@
             overflow: hidden;
         }
 
-        /* Контейнер книги с вашей лесной текстурой */
-        .book-spread {
+        /* Точные пропорции вашего арта (соотношение сторон 3:2) */
+        .book-wrapper {
             position: relative;
             width: 1200px;
-            height: 780px;
-            background-image: url('forest-book.jpg'); /* Название вашей картинки */
-            background-size: cover;
+            height: 800px;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        .book-spread {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('forest-book.jpg');
+            background-size: 100% 100%; /* Растягивает картинку ровно по границам, без обрезки */
             background-position: center;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95);
-            border-radius: 8px;
+            background-repeat: no-repeat;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
             display: flex;
             box-sizing: border-box;
-            /* Попадаем текстом точно на левую страницу пергамента */
-            padding: 75px 80px 75px 135px;
-            transition: opacity 0.4s ease;
+            /* Попадаем текстом строго на левую страницу пергамента */
+            padding: 10% 52% 10% 11%;
+            transition: opacity 0.3s ease;
         }
 
         /* Левая страница (текстовая зона) */
         .book-page-left {
-            width: 50%;
+            width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-sizing: border-box;
-            padding-right: 30px;
         }
 
         .page-number {
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             color: #4a3b2c;
             letter-spacing: 2px;
             font-family: 'Cormorant Garamond', serif;
@@ -54,30 +63,30 @@
 
         .book-title {
             text-align: center;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #2b2014;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
             text-transform: uppercase;
             font-family: 'Cormorant Garamond', serif;
         }
 
         .speaker-icon {
             text-align: center;
-            font-size: 17px;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 10px;
             color: #5c4938;
             font-style: italic;
             font-family: 'Cormorant Garamond', serif;
         }
 
         .story-text {
-            font-size: 19px;
-            line-height: 1.6;
+            font-size: 18px;
+            line-height: 1.55;
             color: #23190f;
             text-align: justify;
-            max-height: 400px;
+            max-height: 380px;
             overflow-y: auto;
             padding-right: 5px;
             font-family: 'Cormorant Garamond', serif;
@@ -87,7 +96,7 @@
         .choices-box {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             margin-top: auto;
         }
 
@@ -95,16 +104,16 @@
             display: block;
             background: rgba(212, 196, 168, 0.85);
             border: 1px solid #5c4938;
-            padding: 10px 15px;
+            padding: 8px 12px;
             color: #2b2014;
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             transition: all 0.2s ease;
             border-radius: 3px;
             cursor: pointer;
             font-family: 'Cormorant Garamond', serif;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .choices-box button:hover {
@@ -113,87 +122,66 @@
             border-color: #111;
         }
 
-        /* Левые закладки (в стиле арта) */
-        .side-badges-left {
+        /* Цифры на закладках (поверх готовых иконок на картинке) */
+        .badge-stat {
             position: absolute;
-            top: 50%;
-            left: -48px;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 20;
-        }
-
-        /* Правые закладки (в стиле арта) */
-        .side-badges-right {
-            position: absolute;
-            top: 50%;
-            right: -48px;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 20;
-        }
-
-        .badge-item {
-            width: 44px;
-            height: 44px;
-            background: #2b2014;
-            border: 2px solid #7a6345;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #e8dcc4;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-            font-size: 16px;
-        }
-
-        .badge-item span {
             font-size: 11px;
             font-weight: bold;
-            color: #d4c4a8;
+            color: #f4ecd8;
+            background: rgba(20, 14, 9, 0.8);
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid #5c4938;
+            font-family: 'Cormorant Garamond', serif;
         }
+
+        /* Точное позиционирование счётчиков поверх левых закладок на арте */
+        #stat-pine-box   { top: 22.5%; left: 6.2%; }
+        #stat-twig-box   { top: 31.5%; left: 6.2%; }
+        #stat-horns-box  { top: 40.5%; left: 6.2%; }
+        #stat-mush-box   { top: 49.5%; left: 6.2%; }
+        #stat-nest-box   { top: 58.5%; left: 6.2%; }
+
+        /* Точное позиционирование счётчиков поверх правых закладок на арте */
+        #stat-oak-box    { top: 22.5%; right: 6.2%; }
+        #stat-deer-box   { top: 31.5%; right: 6.2%; }
+        #stat-fern-box   { top: 40.5%; right: 6.2%; }
+        #stat-fir-box    { top: 49.5%; right: 6.2%; }
+        #stat-paw-box    { top: 58.5%; right: 6.2%; }
     </style>
 </head>
 <body>
 
-<!-- Левые лесные закладки -->
-<div class="side-badges-left">
-    <div class="badge-item" title="Шишки">🌲 <span id="stat-pine">0</span></div>
-    <div class="badge-item" title="Ветка">🌿 <span id="stat-twig">0</span></div>
-    <div class="badge-item" title="Рога">🦌 <span id="stat-horns">0</span></div>
-    <div class="badge-item" title="Грибы">🍄 <span id="stat-mush">0</span></div>
-    <div class="badge-item" title="Гнездо">🪺 <span id="stat-nest">0</span></div>
-</div>
+<div class="book-wrapper">
+    <!-- Счетчики прямо поверх левых и правых закладок книги -->
+    <div class="badge-stat" id="stat-pine-box">🌲 <span id="stat-pine">0</span></div>
+    <div class="badge-stat" id="stat-twig-box">🌿 <span id="stat-twig">0</span></div>
+    <div class="badge-stat" id="stat-horns-box">🦌 <span id="stat-horns">0</span></div>
+    <div class="badge-stat" id="stat-mush-box">🍄 <span id="stat-mush">0</span></div>
+    <div class="badge-stat" id="stat-nest-box">🪺 <span id="stat-nest">0</span></div>
 
-<!-- Правые лесные закладки -->
-<div class="side-badges-right">
-    <div class="badge-item" title="Дуб">🌰 <span id="stat-oak">0</span></div>
-    <div class="badge-item" title="Олень">🦌 <span id="stat-deer">0</span></div>
-    <div class="badge-item" title="Папоротник">🌿 <span id="stat-fern">0</span></div>
-    <div class="badge-item" title="Ель">🎄 <span id="stat-fir">0</span></div>
-    <div class="badge-item" title="След">🐾 <span id="stat-paw">0</span></div>
-</div>
+    <div class="badge-stat" id="stat-oak-box">🌰 <span id="stat-oak">0</span></div>
+    <div class="badge-stat" id="stat-deer-box">🦌 <span id="stat-deer">0</span></div>
+    <div class="badge-stat" id="stat-fern-box">🌿 <span id="stat-fern">0</span></div>
+    <div class="badge-stat" id="stat-fir-box">🎄 <span id="stat-fir">0</span></div>
+    <div class="badge-stat" id="stat-paw-box">🐾 <span id="stat-paw">0</span></div>
 
-<div class="book-spread" id="book-container">
-    <div class="book-page-left">
-        <div class="page-number" id="page-num">1132</div>
-        <div>
-            <div class="book-title" id="page-title">Темпест</div>
-            <div class="speaker-icon" id="page-speaker">❖ Корнелий Темпест ❖</div>
-            <div class="story-text" id="page-text">
-                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.
+    <div class="book-spread" id="book-container">
+        <div class="book-page-left">
+            <div class="page-number" id="page-num">1132</div>
+            <div>
+                <div class="book-title" id="page-title">Темпест</div>
+                <div class="speaker-icon" id="page-speaker">❖ Корнелий Темпест ❖</div>
+                <div class="story-text" id="page-text">
+                    — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.
+                </div>
             </div>
-        </div>
-        
-        <div class="choices-box" id="choices-container">
-            <button onclick="changePage('page2', 1, 0, 0)">Принять свою ношу (Путь Стержня)</button>
-            <button onclick="changePage('page3', 0, 1, 0)">Уповать на высший смысл (Путь Духа)</button>
-            <button onclick="changePage('page4', 0, 0, 1)">Отвергнуть этот мир (Путь Тьмы)</button>
+            
+            <div class="choices-box" id="choices-container">
+                <button onclick="changePage('page2', {pine: 1})">Принять свою ношу (Путь Стержня)</button>
+                <button onclick="changePage('page3', {horns: 1})">Уповать на высший смысл (Путь Духа)</button>
+                <button onclick="changePage('page4', {mush: 1})">Отвергнуть этот мир (Путь Тьмы)</button>
+            </div>
         </div>
     </div>
 </div>
@@ -266,7 +254,7 @@
         'page7': {
             num: "1138",
             title: "Грань миров",
-            speaker: "❖ Вивидение ❖",
+            speaker: "❖ Видение ❖",
             text: "На секунду реальность трескается. Вы видите горящие города и огромную тень, летящую с севера.",
             choices: [
                 { text: "Готовиться к бою", target: 'page9', stats: { fern: 1 } },
@@ -315,7 +303,6 @@
     };
 
     function changePage(pageId, statsChange) {
-        // Обновляем статистику по конкретным закладкам
         if (statsChange) {
             for (let key in statsChange) {
                 if (stats.hasOwnProperty(key)) {
@@ -347,7 +334,7 @@
                 });
             }
             container.style.opacity = 1;
-        }, 300);
+        }, 250);
     }
 </script>
 
