@@ -124,45 +124,11 @@
             color: #fcf8f2;
             border-color: #111;
         }
-
-        .badge-stat {
-            position: absolute;
-            z-index: 10;
-            font-size: 11px;
-            font-weight: bold;
-            color: #fff;
-            background: rgba(45, 33, 20, 0.92);
-            padding: 1px 5px;
-            border-radius: 4px;
-            border: 1px solid #d4be94;
-            font-family: 'Cormorant Garamond', serif;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        #stat-evil-box   { top: 16.5%; left: 5.2%; }
-        #stat-war-box    { top: 26.5%; left: 5.2%; }
-        #stat-monk-box   { top: 36.5%; left: 5.2%; }
-        #stat-rage-box   { top: 46.5%; left: 5.2%; }
-
-        #stat-ash-box    { top: 16.5%; right: 5.2%; }
-        #stat-steel-box  { top: 26.5%; right: 5.2%; }
-        #stat-soul-box   { top: 36.5%; right: 5.2%; }
-        #stat-fate-box   { top: 46.5%; right: 5.2%; }
     </style>
 </head>
 <body>
 
 <div class="book-wrapper">
-    <div class="badge-stat" id="stat-evil-box">🖤 Зло: <span id="stat-evil">0</span></div>
-    <div class="badge-stat" id="stat-war-box">⚔️ Воин: <span id="stat-war">0</span></div>
-    <div class="badge-stat" id="stat-monk-box">📿 Монах: <span id="stat-monk">0</span></div>
-    <div class="badge-stat" id="stat-rage-box">🔥 Гнев: <span id="stat-rage">0</span></div>
-
-    <div class="badge-stat" id="stat-ash-box">🌫️ Пепел: <span id="stat-ash">0</span></div>
-    <div class="badge-stat" id="stat-steel-box">🗡️ Сталь: <span id="stat-steel">0</span></div>
-    <div class="badge-stat" id="stat-soul-box">🕊️ Дух: <span id="stat-soul">0</span></div>
-    <div class="badge-stat" id="stat-fate-box">📜 Рок: <span id="stat-fate">0</span></div>
-
     <div class="book-spread" id="book-container">
         <div class="book-page-left">
             <div class="page-number" id="page-num">01</div>
@@ -175,17 +141,15 @@
             </div>
             
             <div class="choices-box" id="choices-container">
-                <button onclick="changePage('evil1', {evil: 1, rage: 1})">Проклясть этот мир и встать на Путь Зла</button>
-                <button onclick="changePage('war1', {war: 1, steel: 1})">Поднять брошенный меч и выбрать Путь Воина</button>
-                <button onclick="changePage('monk1', {monk: 1, soul: 1})">Уйти в горный монастырь искать покой (Путь Монаха)</button>
+                <button onclick="changePage('evil1')">Проклясть этот мир и встать на Путь Зла</button>
+                <button onclick="changePage('war1')">Поднять брошенный меч и выбрать Путь Воина</button>
+                <button onclick="changePage('monk1')">Уйти в горный монастырь искать покой (Путь Монаха)</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let stats = { evil: 0, war: 0, monk: 0, rage: 0, ash: 0, steel: 0, soul: 0, fate: 0 };
-
     const pagesData = {
         'page1': {
             num: "01",
@@ -193,9 +157,9 @@
             speaker: "❖ Пепелище ❖",
             text: "Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?",
             choices: [
-                { text: "Проклясть этот мир и встать на Путь Зла", target: 'evil1', stats: { evil: 1, rage: 1 } },
-                { text: "Поднять брошенный меч и выбрать Путь Воина", target: 'war1', stats: { war: 1, steel: 1 } },
-                { text: "Уйти в горный монастырь искать покой (Путь Монаха)", target: 'monk1', stats: { monk: 1, soul: 1 } }
+                { text: "Проклясть этот мир и встать на Путь Зла", target: 'evil1' },
+                { text: "Поднять брошенный меч и выбрать Путь Воина", target: 'war1' },
+                { text: "Уйти в горный монастырь искать покой (Путь Монаха)", target: 'monk1' }
             ]
         },
 
@@ -206,8 +170,8 @@
             speaker: "❖ Зов мести ❖",
             text: "Вы больше не верите в справедливость богов. Если мир позволил сожрать ваш дом, вы сами станете кошмаром для этого мира. Вы находите в грязи ржавый тесак и решаете идти по следу мародеров, не щадя никого на своем пути.<br><br>Первая деревня на вашем пути кажется беспечной.",
             choices: [
-                { text: "Совершить ночной налет на селение", target: 'evil2', stats: { evil: 1, ash: 1 } },
-                { text: "Вернуться к развилке", target: 'page1', stats: {} }
+                { text: "Совершить ночной налет на селение", target: 'evil2' },
+                { text: "Вернуться к развилке", target: 'page1' }
             ]
         },
         'evil2': {
@@ -216,8 +180,8 @@
             speaker: "❖ Тёмный хозяин ❖",
             text: "Вы поджигаете чужие амбары так же, как сожгли ваш собственный дом. Глядя на паникующих людей, вы чувствуете странное упоение. Боль уходит, уступая место абсолютной власти над чужими жизнями.<br><br>Вы обрели дурную славу. Что дальше?",
             choices: [
-                { text: "Собрать банду отъявленных головорезов", target: 'ending_evil', stats: { evil: 2 } },
-                { text: "В начало истории", target: 'page1', stats: {} }
+                { text: "Собрать банду отъявленных головорезов", target: 'ending_evil' },
+                { text: "В начало истории", target: 'page1' }
             ]
         },
 
@@ -228,8 +192,8 @@
             speaker: "❖ Оружейная палата ❖",
             text: "Вы вытаскиваете из-под обломков сгоревшей кузницы тяжелый полуторный меч отца. Металл черен от копоти, но лезвие остро, как бритва. Вы даете себе клятву истреблять разбойников и защищать тех, кто не может постоять за себя.<br><br>Вы выходите на большой тракт в поисках справедливости.",
             choices: [
-                { text: "Вступить в бой с отрядом разбойников у моста", target: 'war2', stats: { war: 1, steel: 1 } },
-                { text: "Вернуться к развилке", target: 'page1', stats: {} }
+                { text: "Вступить в бой с отрядом разбойников у моста", target: 'war2' },
+                { text: "Вернуться к развилке", target: 'page1' }
             ]
         },
         'war2': {
@@ -238,8 +202,8 @@
             speaker: "❖ Кровавый мост ❖",
             text: "Звон стали разносится над рекой. Ваши удары точны и безжалостны к врагам, но вы бережете невинных. Шрамы украшают ваше тело, а имя становится легендой среди простого народа.<br><br>Вы готовы к генеральному сражению.",
             choices: [
-                { text: "Возглавить ополчение против армии захватчиков", target: 'ending_war', stats: { war: 2 } },
-                { text: "В начало истории", target: 'page1', stats: {} }
+                { text: "Возглавить ополчение против армии захватчиков", target: 'ending_war' },
+                { text: "В начало истории", target: 'page1' }
             ]
         },
 
@@ -250,8 +214,8 @@
             speaker: "❖ Горный монастырь ❖",
             text: "Оставив пепелище за спиной, вы недели шли на север, пока не добрались до туманных пиков монастыря Семи Ветров. Старый настоятель принял вас в свою обитель. Здесь учат усмирять боль и искать истину в тишине молитв.<br><br>Тяжелые мысли о мести постепенно утихают.",
             choices: [
-                { text: "Посвятить себя суровым тренировкам тела и духа", target: 'monk2', stats: { monk: 1, soul: 1 } },
-                { text: "Вернуться к развилке", target: 'page1', stats: {} }
+                { text: "Посвятить себя суровым тренировкам тела и духа", target: 'monk2' },
+                { text: "Вернуться к развилке", target: 'page1' }
             ]
         },
         'monk2': {
@@ -260,8 +224,8 @@
             speaker: "❖ Просветление ❖",
             text: "Годы медитаций и тренировок изменили вас. Вы научились слышать движение ветра и управлять собственной энергией ци. Боль утраты превратилась в нерушимый внутренний стержень.<br><br>Монастырь отправляет вас в мир нести исцеление.",
             choices: [
-                { text: "Спуститься в долину помогать страждущим", target: 'ending_monk', stats: { monk: 2 } },
-                { text: "В начало истории", target: 'page1', stats: {} }
+                { text: "Спуститься в долину помогать страждущим", target: 'ending_monk' },
+                { text: "В начало истории", target: 'page1' }
             ]
         },
 
@@ -271,34 +235,25 @@
             title: "Финал: Владыка Пепла",
             speaker: "❖ Тёмная легенда ❖",
             text: "Вы построили свою империю на страхе и руинах. Ни один король больше не смеет пренебрегать вашим именем. Вы отомстили миру, но остались совсем один среди холодных сокровищ.<br><br>Глава I завершена на Пути Зла.",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
+            choices: [{ text: 'Пройти историю заново', target: 'page1' }]
         },
         'ending_war': {
             num: "09",
             title: "Финал: Клинок Справедливости",
             speaker: "❖ Герой королевства ❖",
             text: "Ваш меч принес мир выжженным землям. Люди слагают легенды о Безымянном Воине, который поднялся из пепла и спас королевство от гибели.<br><br>Глава I завершена на Пути Воина.",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
+            choices: [{ text: 'Пройти историю заново', target: 'page1' }]
         },
         'ending_monk': {
             num: "10",
             title: "Финал: Умиротворение",
             speaker: "❖ Мудрец из тумана ❖",
             text: "Вы обрели то, что не могут купить короли — душевный покой. Ваша мудрость спасает тысячи жизней, а шрамы прошлого стали лишь напоминанием о пройденном уроке.<br><br>Глава I завершена на Пути Монаха.",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
+            choices: [{ text: 'Пройти историю заново', target: 'page1' }]
         }
     };
 
-    function changePage(pageId, statsChange) {
-        if (statsChange) {
-            for (let key in statsChange) {
-                if (stats.hasOwnProperty(key)) {
-                    stats[key] += statsChange[key];
-                    document.getElementById('stat-' + key).innerText = stats[key];
-                }
-            }
-        }
-
+    function changePage(pageId) {
         const container = document.getElementById('book-container');
         container.style.opacity = 0;
 
@@ -316,7 +271,7 @@
                 page.choices.forEach(ch => {
                     const btn = document.createElement('button');
                     btn.innerText = ch.text;
-                    btn.onclick = () => changePage(ch.target, ch.stats);
+                    btn.onclick = () => changePage(ch.target);
                     choicesBox.appendChild(btn);
                 });
             }
