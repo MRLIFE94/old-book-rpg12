@@ -76,48 +76,52 @@
             font-weight: bold;
             letter-spacing: 3px;
             color: #2b231d;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
         .speaker-icon {
             text-align: center;
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 16px;
+            margin-bottom: 12px;
             color: #5c4938;
+            font-style: italic;
         }
 
         .story-text {
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 17px;
+            line-height: 1.55;
             color: #2b231d;
             text-align: justify;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 5px;
         }
 
         .choices-box {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             margin-top: auto;
         }
 
-        .choices-box button, .choices-box a {
+        .choices-box button {
             display: block;
             background: #d4c4a8;
             border: 1px solid #5c4938;
-            padding: 10px 15px;
+            padding: 9px 14px;
             color: #2b231d;
             text-decoration: none;
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.2s ease;
             border-radius: 2px;
             cursor: pointer;
             font-family: inherit;
         }
 
-        .choices-box button:hover, .choices-box a:hover {
+        .choices-box button:hover {
             background: #2b231d;
             color: #f4ecd8;
             border-color: #111;
@@ -170,7 +174,7 @@
             <div class="book-title" id="page-title">Темпест</div>
             <div class="speaker-icon" id="page-speaker">❖ Корнелий Темпест ❖</div>
             <div class="story-text" id="page-text">
-                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы...
+                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.
             </div>
         </div>
         
@@ -184,22 +188,21 @@
     <div class="book-page-right">
         <div style="border: 8px solid #2b231d; padding: 4px; background: #111; max-width: 380px;">
             <div style="width: 350px; height: 450px; background: #33261d; display: flex; align-items: center; justify-content: center; color: #a38f75; text-align: center; font-style: italic; padding: 20px;" id="page-illustration">
-                [ Иллюстрация главы ]
+                [ Глава I: Наследие ]
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Переменные характеристик игрока
     let stats = { rod: 0, spirit: 0, dark: 0 };
 
-    // База данных страниц вашей истории (можно легко дополнять сюжет!)
     const pagesData = {
         'page1': {
             num: "1132",
             title: "Темпест",
             speaker: "❖ Корнелий Темпест ❖",
+            illustration: "[ Глава I: Наследие ]",
             text: "— Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.",
             choices: [
                 { text: "Принять свою ношу (Путь Стержня)", target: 'page2', r: 1, s: 0, d: 0 },
@@ -210,34 +213,90 @@
         'page2': {
             num: "1133",
             title: "Путь Стержня",
-            speaker: "❖ Выбор сделан ❖",
-            text: "Вы чувствуете, как внутри вас укрепляется стальной стержень внутренней воли. Мир вокруг перестает казаться размытым кошмаром — реальность обретает четкие, суровые грани.",
+            speaker: "❖ Закалка воли ❖",
+            illustration: "[ Образ: Сталь и Пепел ]",
+            text: "Вы выпрямляете спину. Боль в груди отступает, сменяясь тяжелым, ровным стуком сердца. Корнелий одобрительно кивает, опираясь на массивный посох.<br><br>— Хорошо. Боль — это всего лишь сигнал слабым. Настоящая сила куется тогда, когда под ногами горит земля.",
             choices: [
-                { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+                { text: "Спросить о своём предназначении", target: 'page5', r: 1, s: 0, d: 0 },
+                { text: "Потребовать оружие немедленно", target: 'page6', r: 2, s: 0, d: 0 }
             ]
         },
         'page3': {
             num: "1134",
             title: "Путь Духа",
-            speaker: "❖ Выбор сделан ❖",
-            text: "Разум очищается от суеты. Вы прислушиваетесь к тишине между строк этого мира, и неведомая легкость касается вашего сознания.",
+            speaker: "❖ Внутренний свет ❖",
+            illustration: "[ Образ: Звездный узор ]",
+            text: "Вы закрываете глаза. Сумрак каменного зала растворяется, уступая место внутреннему зрению. Вы чувствуете невидимые нити, связывающие прошлое, настоящее и тысячи нерожденных жизней.<br><br>— Ты слышишь тишину, — шепчет наставник. — Это редкий дар.",
             choices: [
-                { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+                { text: "Попытаться заглянуть за грань", target: 'page7', r: 0, s: 2, d: 0 },
+                { text: "Вернуться к земным заботам", target: 'page1', r: 0, s: 1, d: 0 }
             ]
         },
         'page4': {
             num: "1135",
             title: "Путь Тьмы",
-            speaker: "❖ Выбор сделан ❖",
-            text: "Тени сгущаются вокруг страниц. Вы отворачиваетесь от света, предпочитая холодную, но абсолютную независимость.",
+            speaker: "❖ Холодный рассудок ❖",
+            illustration: "[ Образ: Бездна ]",
+            text: "Губы кривятся в усмешке. К чему эти высокие слова о предназначении, если мир вокруг прогнил до самого основания? Вы чувствуете, как холодная пустота внутри вас заполняет каждую трещину.<br><br>Корнелий хмурится: — Осторожнее с бездной, мальчик. Она смотрит в ответ.",
+            choices: [
+                { text: "Принять холод пустоты", target: 'page8', r: 0, s: 0, d: 2 },
+                { text: "Сдержать внутренний мрак", target: 'page1', r: 1, s: 0, d: -1 }
+            ]
+        },
+        'page5': {
+            num: "1136",
+            title: "Предназначение",
+            speaker: "❖ Испытание башни ❖",
+            illustration: "[ Образ: Древний фолиант ]",
+            text: "— Твоя судьба — держать врата, когда рухнут последние бастионы Старого Королевства, — говорит Корнелий, подводя вас к тяжелой дубовой двери, окованной железом.<br><br>За дверью слышится низкий гул, похожий на дыхание спящего зверя.",
+            choices: [
+                { text: "Открыть дверь без страха", target: 'page9', r: 2, s: 0, d: 0 },
+                { text: "Отступить назад", target: 'page1', r: -1, s: 0, d: 0 }
+            ]
+        },
+        'page6': {
+            num: "11375",
+            title: "Отказ от слов",
+            speaker: "❖ Путь действия ❖",
+            illustration: "[ Образ: Клинок ]",
+            text: "Вы резко разворачиваетесь к оружейной стойке. Сталь манит своей простотой. Никаких пророчеств — только удар и ответный удар.",
+            choices: [
+                { text: "Начать тренировку", target: 'page1', r: 1, s: 0, d: 0 }
+            ]
+        },
+        'page7': {
+            num: "1138",
+            title: "Грань миров",
+            speaker: "❖ Вивидение ❖",
+            illustration: "[ Образ: Космос ]",
+            text: "На секунду вам кажется, что вы видите всё: и свою деревню, и далекие звезды, и даже ту самую тень, что преследует вас с самого рождения.",
+            choices: [
+                { text: "Проснуться!", target: 'page1', r: 0, s: 1, d: 0 }
+            ]
+        },
+        'page8': {
+            num: "1139",
+            title: "Холод",
+            speaker: "❖ Сила тени ❖",
+            illustration: "[ Образ: Черный огонь ]",
+            text: "Тьма подчиняется вам, но взамен требует тепла вашей человеческой души. Вы чувствуете странную легкость и абсолютное одиночество.",
             choices: [
                 { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+            ]
+        },
+        'page9': {
+            num: "1140",
+            title: "Глава II: Порог",
+            speaker: "❖ Испытание началось ❖",
+            illustration: "[ Образ: Свет за дверью ]",
+            text: "Дверь со скрипом поддается вашему натиску. Внутри вспыхивает ослепительный синий свет. Пути назад больше нет — началась ваша настоящая история...",
+            choices: [
+                { text:'Начать историю заново', target: 'page1', r: 0, s: 0, d: 0 }
             ]
         }
     };
 
     function changePage(pageId, rAdd, sAdd, dAdd) {
-        // Добавляем очки характеристик
         stats.rod += rAdd;
         stats.spirit += sAdd;
         stats.dark += dAdd;
@@ -247,7 +306,7 @@
         document.getElementById('stat-dark').innerText = stats.dark;
 
         const container = document.getElementById('book-container');
-        container.style.opacity = 0; // Плавное затухание для эффекта перелистывания
+        container.style.opacity = 0;
 
         setTimeout(() => {
             const page = pagesData[pageId];
@@ -255,6 +314,7 @@
                 document.getElementById('page-num').innerText = page.num;
                 document.getElementById('page-title').innerText = page.title;
                 document.getElementById('page-speaker').innerText = page.speaker;
+                document.getElementById('page-illustration').innerText = page.illustration;
                 document.getElementById('page-text').innerHTML = page.text;
 
                 const choicesBox = document.getElementById('choices-container');
@@ -267,7 +327,7 @@
                     choicesBox.appendChild(btn);
                 });
             }
-            container.style.opacity = 1; // Плавное появление новой страницы
+            container.style.opacity = 1;
         }, 300);
     }
 </script>
