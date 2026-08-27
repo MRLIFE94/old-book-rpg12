@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Темпест — Лесная Книга</title>
+    <title>Хроники Этернии — Книга Судеб</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -10,8 +10,8 @@
         }
 
         body {
-            /* Светлый, уютный лесной фон со свечением, чтобы страница никогда не была черной */
-            background: radial-gradient(circle at center, #4a5d45 0%, #222b20 100%);
+            /* Светлый, уютный пергаментный фон с мягким дневным свечением */
+            background: radial-gradient(circle at center, #f4ebd0 0%, #b8a379 100%);
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -24,27 +24,27 @@
         /* Обёртка книги */
         .book-wrapper {
             position: relative;
-            width: 1100px;
-            height: 733px;
+            width: 1150px;
+            height: 765px;
             max-width: 96vw;
             max-height: 96vh;
-            filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
+            /* Красивая объёмная тень вместо черноты */
+            filter: drop-shadow(0 20px 40px rgba(60, 45, 25, 0.45));
         }
 
-        /* Сама книга (картинка-разворот) */
+        /* Сама книга (новый светлый арт-разворот) */
         .book-spread {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Убедитесь, что имя файла картинки на GitHub совпадает с forest-book.jpg */
-            background-image: url('forest-book.jpg');
+            background-image: url('book-new.jpg');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
-            padding: 8% 52% 8% 10%; /* Четкие пропорции под левую страницу пергамента */
+            padding: 11% 53% 11% 11%; /* Точное попадание по рамке левой страницы */
             transition: opacity 0.25s ease;
         }
 
@@ -62,7 +62,7 @@
         .page-number {
             text-align: center;
             font-size: 14px;
-            color: #4a3824;
+            color: #59442a;
             letter-spacing: 2px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: bold;
@@ -70,10 +70,10 @@
 
         .book-title {
             text-align: center;
-            font-size: 26px;
+            font-size: 25px;
             font-weight: bold;
             letter-spacing: 2px;
-            color: #261b11;
+            color: #2b1d11;
             margin-bottom: 2px;
             text-transform: uppercase;
             font-family: 'Cormorant Garamond', serif;
@@ -83,7 +83,7 @@
             text-align: center;
             font-size: 15px;
             margin-bottom: 8px;
-            color: #59432d;
+            color: #6b5137;
             font-style: italic;
             font-family: 'Cormorant Garamond', serif;
             font-weight: bold;
@@ -92,9 +92,9 @@
         .story-text {
             font-size: 18px;
             line-height: 1.55;
-            color: #1a120b; /* Темный, отлично читаемый контрастный текст */
+            color: #1a120b; /* Темный, ультраконтрастный текст */
             text-align: justify;
-            max-height: 360px;
+            max-height: 350px;
             overflow-y: auto;
             padding-right: 5px;
             font-family: 'Cormorant Garamond', serif;
@@ -111,8 +111,8 @@
 
         .choices-box button {
             display: block;
-            background: rgba(245, 237, 222, 0.92);
-            border: 1px solid #5c4938;
+            background: rgba(255, 250, 238, 0.95);
+            border: 1px solid #7a6148;
             padding: 8px 12px;
             color: #21160d;
             text-align: center;
@@ -122,190 +122,180 @@
             border-radius: 4px;
             cursor: pointer;
             font-family: 'Cormorant Garamond', serif;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .choices-box button:hover {
-            background: #2b2014;
+            background: #3b2a1a;
             color: #fcf8f2;
             border-color: #111;
         }
 
-        /* Счетчики на левых и правых закладках арта */
+        /* Статистика на закладках нового арта (по 4 штуки с каждой стороны) */
         .badge-stat {
             position: absolute;
             z-index: 10;
             font-size: 11px;
             font-weight: bold;
             color: #fff;
-            background: rgba(35, 24, 15, 0.9);
+            background: rgba(45, 33, 20, 0.92);
             padding: 1px 5px;
             border-radius: 4px;
-            border: 1px solid #c2a67d;
+            border: 1px solid #d4be94;
             font-family: 'Cormorant Garamond', serif;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        #stat-pine-box   { top: 22.5%; left: 6.2%; }
-        #stat-twig-box   { top: 31.5%; left: 6.2%; }
-        #stat-horns-box  { top: 40.5%; left: 6.2%; }
-        #stat-mush-box   { top: 49.5%; left: 6.2%; }
-        #stat-nest-box   { top: 58.5%; left: 6.2%; }
+        /* Левая сторона (4 закладки под иконки арта сверху вниз) */
+        #stat-crown-box  { top: 16.5%; left: 5.2%; }
+        #stat-mask-box   { top: 26.5%; left: 5.2%; }
+        #stat-star-box   { top: 36.5%; left: 5.2%; }
+        #stat-gem-box    { top: 46.5%; left: 5.2%; }
 
-        #stat-oak-box    { top: 22.5%; right: 6.2%; }
-        #stat-deer-box   { top: 31.5%; right: 6.2%; }
-        #stat-fern-box   { top: 40.5%; right: 6.2%; }
-        #stat-fir-box    { top: 49.5%; right: 6.2%; }
-        #stat-paw-box    { top: 58.5%; right: 6.2%; }
+        /* Правая сторона (4 закладки под иконки арта сверху вниз) */
+        #stat-throne-box { top: 16.5%; right: 5.2%; }
+        #stat-dragon-box { top: 26.5%; right: 5.2%; }
+        #stat-astrol-box { top: 36.5%; right: 5.2%; }
+        #stat-ring-box   { top: 46.5%; right: 5.2%; }
     </style>
 </head>
 <body>
 
 <div class="book-wrapper">
-    <!-- Счетчики на деревянных закладках -->
-    <div class="badge-stat" id="stat-pine-box">🌲 <span id="stat-pine">0</span></div>
-    <div class="badge-stat" id="stat-twig-box">🌿 <span id="stat-twig">0</span></div>
-    <div class="badge-stat" id="stat-horns-box">🦌 <span id="stat-horns">0</span></div>
-    <div class="badge-stat" id="stat-mush-box">🍄 <span id="stat-mush">0</span></div>
-    <div class="badge-stat" id="stat-nest-box">🪺 <span id="stat-nest">0</span></div>
+    <!-- Левые закладки -->
+    <div class="badge-stat" id="stat-crown-box">👑 <span id="stat-crown">0</span></div>
+    <div class="badge-stat" id="stat-mask-box">🎭 <span id="stat-mask">0</span></div>
+    <div class="badge-stat" id="stat-star-box">✨ <span id="stat-star">0</span></div>
+    <div class="badge-stat" id="stat-gem-box">💎 <span id="stat-gem">0</span></div>
 
-    <div class="badge-stat" id="stat-oak-box">🌰 <span id="stat-oak">0</span></div>
-    <div class="badge-stat" id="stat-deer-box">🦌 <span id="stat-deer">0</span></div>
-    <div class="badge-stat" id="stat-fern-box">🌿 <span id="stat-fern">0</span></div>
-    <div class="badge-stat" id="stat-fir-box">🎄 <span id="stat-fir">0</span></div>
-    <div class="badge-stat" id="stat-paw-box">🐾 <span id="stat-paw">0</span></div>
+    <!-- Правые закладки -->
+    <div class="badge-stat" id="stat-throne-box">🪑 <span id="stat-throne">0</span></div>
+    <div class="badge-stat" id="stat-dragon-box">🐉 <span id="stat-dragon">0</span></div>
+    <div class="badge-stat" id="stat-astrol-box">🔭 <span id="stat-astrol">0</span></div>
+    <div class="badge-stat" id="stat-ring-box">💍 <span id="stat-ring">0</span></div>
 
     <div class="book-spread" id="book-container">
         <div class="book-page-left">
-            <div class="page-number" id="page-num">1132</div>
+            <div class="page-number" id="page-num">01</div>
             <div>
-                <div class="book-title" id="page-title">Темпест</div>
-                <div class="speaker-icon" id="page-speaker">❖ Корнелий Темпест ❖</div>
+                <div class="book-title" id="page-title">Пробуждение</div>
+                <div class="speaker-icon" id="page-speaker">❖ Башня Высокого Неба ❖</div>
                 <div class="story-text" id="page-text">
-                    — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.
+                    Вы открываете глаза под мерный звон серебряных колоколов. За окнами башни раскинулись золотые равнины Этернии, залитые лучами восходящего солнца. На каменном столе лежит древний фолиант и записка с вашей печатью.<br><br>Сегодня день Великого Совета, и вам предстоит решить судьбу ордена.
                 </div>
             </div>
             
             <div class="choices-box" id="choices-container">
-                <button onclick="changePage('page2', {pine: 1})">Принять свою ношу (Путь Стержня)</button>
-                <button onclick="changePage('page3', {horns: 1})">Уповать на высший смысл (Путь Духа)</button>
-                <button onclick="changePage('page4', {mush: 1})">Отвергнуть этот мир (Путь Тьмы)</button>
+                <button onclick="changePage('page2', {crown: 1})">Взять с собой королевский скипетр (Путь Власти)</button>
+                <button onclick="changePage('page3', {star: 1})">Обратиться к древним манускриптам (Путь Мудрости)</button>
+                <button onclick="changePage('page4', {mask: 1})">Надеть маску скрытности (Путь Интриг)</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let stats = { pine: 0, twig: 0, horns: 0, mush: 0, nest: 0, oak: 0, deer: 0, fern: 0, fir: 0, paw: 0 };
+    let stats = { crown: 0, mask: 0, star: 0, gem: 0, throne: 0, dragon: 0, astrol: 0, ring: 0 };
 
     const pagesData = {
         'page1': {
-            num: "1132",
-            title: "Темпест",
-            speaker: "❖ Корнелий Темпест ❖",
-            text: "— Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.",
+            num: "01",
+            title: "Пробуждение",
+            speaker: "❖ Башня Высокого Неба ❖",
+            text: "Вы открываете глаза под мерный звон серебряных колоколов. За окнами башни раскинулись золотые равнины Этернии, залитые лучами восходящего солнца. На каменном столе лежит древний фолиант и записка с вашей печатью.<br><br>Сегодня день Великого Совета, и вам предстоит решить судьбу ордена.",
             choices: [
-                { text: "Принять свою ношу (Путь Стержня)", target: 'page2', stats: { pine: 1 } },
-                { text: "Уповать на высший смысл (Путь Духа)", target: 'page3', stats: { horns: 1 } },
-                { text: "Отвергнуть этот мир (Путь Тьмы)", target: 'page4', stats: { mush: 1 } }
+                { text: "Взять с собой королевский скипетр (Путь Власти)", target: 'page2', stats: { crown: 1 } },
+                { text: "Обратиться к древним манускриптам (Путь Мудрости)", target: 'page3', stats: { star: 1 } },
+                { text: "Надеть маску скрытности (Путь Интриг)", target: 'page4', stats: { mask: 1 } }
             ]
         },
         'page2': {
-            num: "1133",
-            title: "Путь Стержня",
-            speaker: "❖ Закалка воли ❖",
-            text: "Вы выпрямляете спину. Боль в груди отступает, сменяясь тяжелым, ровным стуком сердца. Корнелий одобрительно кивает, опираясь на массивный посох.<br><br>— Хорошо. Боль — это всего лишь сигнал слабым.",
+            num: "02",
+            title: "Зал Совета",
+            speaker: "❖ Выбор лидера ❖",
+            text: "Тяжелые дубовые двери распахиваются. Лорды провинций смотрят на вас с вызовом. Ваше слово должно прозвучать твердо, иначе власть ускользнет из рук.",
             choices: [
-                { text: "Спросить о своём предназначении", target: 'page5', stats: { twig: 1 } },
-                { text: "Потребовать оружие немедленно", target: 'page6', stats: { fir: 1 } }
+                { text: "Потребовать беспрекословного подчинения", target: 'page5', stats: { throne: 1 } },
+                { text: "Предложить советникам компромисс", target: 'page6', stats: { ring: 1 } }
             ]
         },
         'page3': {
-            num: "1134",
-            title: "Путь Духа",
-            speaker: "❖ Внутренний свет ❖",
-            text: "Вы закрываете глаза. Сумрак каменного зала растворяется, уступая место внутреннему зрению. Вы чувствуете невидимые нити вокруг.",
+            num: "03",
+            title: "Библиотека Звезд",
+            speaker: "❖ Тайные знания ❖",
+            text: "Строки в старой книге начинают светиться мягким синим светом. Вы узнаете о забытом пророчестве, способном изменить баланс сил в королевстве.",
             choices: [
-                { text: "Попытаться заглянуть за грань", target: 'page7', stats: { fern: 1 } },
-                { text: "Попросить совета о будущем", target: 'page10', stats: { oak: 1 } }
+                { text: "Изучить карту звездного неба", target: 'page7', stats: { astrol: 1 } },
+                { text: "Искать упоминания о драконах Севера", target: 'page8', stats: { dragon: 1 } }
             ]
         },
         'page4': {
-            num: "1135",
-            title: "Путь Тьмы",
-            speaker: "❖ Холодный рассудок ❖",
-            text: "Губы кривятся в усмешке. К чему эти высокие слова, если мир вокруг прогнил? Вы чувствуете, как холодная пустота заполняет каждую трещину.",
+            num: "04",
+            title: "Тени Дворца",
+            speaker: "❖ Тайный путь ❖",
+            text: "Вы выбираете скрытный путь через внутренние галереи. В темноте коридоров вас поджидает верный шпион с тревожными вестями из столицы.",
             choices: [
-                { text: "Шагнуть в черную полынь", target: 'page8', stats: { paw: 1 } },
-                { text: "Обуздать дикий морок", target: 'page11', stats: { deer: 1 } }
+                { text: "Выслушать донос о заговорщиках", target: 'page9', stats: { gem: 1 } },
+                { text: "Ускользнуть незамеченным в сад", target: 'page1', stats: {} }
             ]
         },
         'page5': {
-            num: "1136",
-            title: "Предназначение",
-            speaker: "❖ Испытание ❖",
-            text: "— Твоя судьба — держать врата, когда рухнут последние бастионы Старого Королевства, — говорит Корнелий, подводя вас к тяжелой двери.",
+            num: "05",
+            title: "Железная воля",
+            speaker: "❖ Тронный зал ❖",
+            text: "Ваша уверенность подавляет любые возражения. Лорды склоняют головы, признавая ваше право вести королевство сквозь бурю.",
             choices: [
-                { text: "Открыть дверь без страха", target: 'page9', stats: { nest: 1 } },
-                { text: "Отступить", target: 'page1', stats: {} }
+                { text: "Возглавить поход к границе", target: 'page10', stats: { throne: 1 } },
+                { text: "Вернуться в начало", target: 'page1', stats: {} }
             ]
         },
         'page6': {
-            num: "1137",
-            title: "Оружие воина",
-            speaker: "❖ Оружейная ❖",
-            text: "Вы резким движением срываете со стойки полуторный меч. Рукоять идеально ложится в ладонь.",
+            num: "06",
+            title: "Путь Согласия",
+            speaker: "❖ Дипломатия ❖",
+            text: "Мирный договор подписан. Союзники улыбаются вам в лицо, но в их глазах читается скрытый расчет.",
             choices: [
-                { text: "Направиться к вратам", target: 'page9', stats: { fir: 1 } },
-                { text: "Вернуться назад", target: 'page1', stats: {} }
+                { text: "Укрепить союз кольцом династии", target: 'page10', stats: { ring: 1 } },
+                { text: "Начать сначала", target: 'page1', stats: {} }
             ]
         },
         'page7': {
-            num: "1138",
-            title: "Грань миров",
-            speaker: "❖ Видение ❖",
-            text: "На секунду реальность трескается. Вы видите горящие города и огромную тень, летящую с севера.",
+            num: "07",
+            title: "Глас Небес",
+            speaker: "❖ Обсерватория ❖",
+            text: "Астролябия указывает на древний артефакт, спрятанный в туманных горах. Знание — ваше главное оружие.",
             choices: [
-                { text: "Готовиться к бою", target: 'page9', stats: { fern: 1 } },
+                { text: "Отправиться на поиски артефакта", target: 'page10', stats: { astrol: 1 } },
                 { text: "В начало", target: 'page1', stats: {} }
             ]
         },
         'page8': {
-            num: "1139",
-            title: "Тёмный дар",
-            speaker: "❖ Истинный холод ❖",
-            text: "Мрак отзывается на ваш зов, обвивая запястья. Теперь вы чувствуете страх каждого живого существа.",
+            num: "08",
+            title: "Дыхание Дракона",
+            speaker: "❖ Северный рубеж ❖",
+            text: "Огромная тень проносится надснежными пиками. Древний страж проснулся, и он ждет достойного собеседника.",
             choices: [
-                { text: "Принять силу", target: 'page9', stats: { paw: 1 } },
+                { text: "Приветствовать крылатого зверя", target: 'page10', stats: { dragon: 1 } },
                 { text: "Сдаться", target: 'page1', stats: {} }
             ]
         },
         'page9': {
-            num: "1140",
-            title: "Глава II: Порог",
-            speaker: "❖ Врата открыты ❖",
-            text: "Тяжелая дверь со скрипом отворяется настежь. Ваше путешествие сквозь бурю только начинается.<br><br>Конец первой главы.",
+            num: "09",
+            title: "Раскрытый заговор",
+            speaker: "❖ Теневая игра ❖",
+            text: "Вы опережаете врагов на шаг. Теперь все нити интриг находятся в ваших руках, а драгоценные камни заговора сияют вашей победой.",
             choices: [
-                { text: 'Пройти историю заново', target: 'page1', stats: {} }
+                { text: "Завершить первую главу", target: 'page10', stats: { gem: 1 } },
+                { text: "Вернуться назад", target: 'page1', stats: {} }
             ]
         },
         'page10': {
-            num: "1141",
-            title: "Совет наставника",
-            speaker: "❖ Корнелий Темпест ❖",
-            text: "— Будущее не высечено на камне, — мягко произносит старик. — Оно пишется прямо сейчас.",
+            num: "10",
+            title: "Глава I: Завершена",
+            speaker: "❖ Начало легенды ❖",
+            text: "Первый шаг сделан. Солнце поднимается над Этернией, освещая ваш уникальный путь.<br><br>Ваше приключение в Книге Судеб продолжается!",
             choices: [
-                { text: "Шагнуть к вратам", target: 'page9', stats: { oak: 1 } },
-                { text: "Начать сначала", target: 'page1', stats: {} }
-            ]
-        },
-        'page11': {
-            num: "1142",
-            title: "Грань равновесия",
-            speaker: "❖ Внутренняя борьба ❖",
-            text: "Вы удерживаете баланс между светом и тьмой. Разум не позволяет ей взять верх.",
-            choices: [
-                { text: "Продолжить путь", target: 'page9', stats: { deer: 1 } },
-                { text: "Вернуться в начало", target: 'page1', stats: {} }
+                { text: 'Пройти историю заново', target: 'page1', stats: {} }
             ]
         }
     };
@@ -346,5 +336,7 @@
     }
 </script>
 
+</body>
+</html>
 </body>
 </html>
