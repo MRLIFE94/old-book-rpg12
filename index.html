@@ -10,7 +10,7 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #f4ebd0 0%, #b8a379 100%);
+            background: #000000; /* Черный фон за книгой */
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -26,32 +26,47 @@
             height: 765px;
             max-width: 96vw;
             max-height: 96vh;
-            filter: drop-shadow(0 20px 40px rgba(60, 45, 25, 0.45));
-        }
-
-        .book-spread {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('book1.jpg'); /* Динамически меняющийся фон */
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+            background-image: url('book-base.jpg'); /* Базовая книга без правой картинки */
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
-            padding: 11% 53% 11% 11%;
-            transition: opacity 0.25s ease, background-image 0.3s ease;
+            padding: 11% 8% 11% 11%; /* Отступы под левую и правую страницы */
         }
 
+        /* Левая страница с текстом и кнопками */
         .book-page-left {
             position: relative;
             z-index: 2;
-            width: 100%;
+            width: 50%;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding-right: 25px;
+        }
+
+        /* Правая страница с иллюстрацией */
+        .book-page-right {
+            position: relative;
+            z-index: 2;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 25px;
+        }
+
+        .illustration {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 4px;
+            transition: background-image 0.3s ease;
         }
 
         .page-number {
@@ -65,7 +80,7 @@
 
         .book-title {
             text-align: center;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             letter-spacing: 2px;
             color: #2b1d11;
@@ -85,11 +100,11 @@
         }
 
         .story-text {
-            font-size: 17px;
-            line-height: 1.5;
+            font-size: 16px;
+            line-height: 1.45;
             color: #1a120b;
             text-align: justify;
-            max-height: 340px;
+            max-height: 310px;
             overflow-y: auto;
             padding-right: 5px;
             font-family: 'Cormorant Garamond', serif;
@@ -99,7 +114,7 @@
         .choices-box {
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 6px;
             margin-top: auto;
         }
 
@@ -110,7 +125,7 @@
             padding: 7px 10px;
             color: #21160d;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             transition: all 0.2s ease;
             border-radius: 4px;
@@ -128,24 +143,28 @@
 </head>
 <body>
 
-<div class="book-wrapper">
-    <div class="book-spread" id="book-container">
-        <div class="book-page-left">
-            <div class="page-number" id="page-num">01</div>
-            <div>
-                <div class="book-title" id="page-title">Выжженный дом</div>
-                <div class="speaker-icon" id="page-speaker">❖ Пепелище ❖</div>
-                <div class="story-text" id="page-text">
-                    Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?
-                </div>
-            </div>
-            
-            <div class="choices-box" id="choices-container">
-                <button onclick="changePage('evil1', 'book3.jpg')">Проклясть этот мир и встать на Путь Зла</button>
-                <button onclick="changePage('war1', 'book4.jpg')">Поднять брошенный меч и выбрать Путь Воина</button>
-                <button onclick="changePage('monk1', 'book5.jpg')">Уйти в горный монастырь искать покой (Путь Монаха)</button>
+<div class="book-wrapper" id="book-container">
+    <!-- Левая страница (текст и выбор) -->
+    <div class="book-page-left">
+        <div class="page-number" id="page-num">01</div>
+        <div>
+            <div class="book-title" id="page-title">Выжженный дом</div>
+            <div class="speaker-icon" id="page-speaker">❖ Пепелище ❖</div>
+            <div class="story-text" id="page-text">
+                Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?
             </div>
         </div>
+        
+        <div class="choices-box" id="choices-container">
+            <button onclick="changePage('evil1', 'book3.jpg')">Проклясть этот мир и встать на Путь Зла</button>
+            <button onclick="changePage('war1', 'book4.jpg')">Поднять брошенный меч и выбрать Путь Воина</button>
+            <button onclick="changePage('monk1', 'book5.jpg')">Уйти в горный монастырь искать покой (Путь Монаха)</button>
+        </div>
+    </div>
+
+    <!-- Правая страница (иллюстрация) -->
+    <div class="book-page-right">
+        <div class="illustration" id="page-image" style="background-image: url('book1.jpg');"></div>
     </div>
 </div>
 
@@ -156,11 +175,11 @@
             title: "Выжженный дом",
             speaker: "❖ Пепелище ❖",
             text: "Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?",
-            bg: "book1.jpg",
+            img: "book1.jpg",
             choices: [
-                { text: "Проклясть этот мир и встать на Путь Зла", target: 'evil1', bg: 'book3.jpg' },
-                { text: "Поднять брошенный меч и выбрать Путь Воина", target: 'war1', bg: 'book4.jpg' },
-                { text: "Уйти в горный монастырь искать покой (Путь Монаха)", target: 'monk1', bg: 'book5.jpg' }
+                { text: "Проклясть этот мир и встать на Путь Зла", target: 'evil1', img: 'book3.jpg' },
+                { text: "Поднять брошенный меч и выбрать Путь Воина", target: 'war1', img: 'book4.jpg' },
+                { text: "Уйти в горный монастырь искать покой (Путь Монаха)", target: 'monk1', img: 'book5.jpg' }
             ]
         },
 
@@ -170,10 +189,10 @@
             title: "Путь Зла: Кровь за Кровь",
             speaker: "❖ Зов мести ❖",
             text: "Вы больше не верите в справедливость богов. Если мир позволил сожрать ваш дом, вы сами станете кошмаром для этого мира. Вы находите в грязи ржавый тесак и решаете идти по следу мародеров, не щадя никого на своем пути.<br><br>Первая деревня на вашем пути кажется беспечной.",
-            bg: "book3.jpg",
+            img: "book3.jpg",
             choices: [
-                { text: "Совершить ночной налет на селение", target: 'evil2', bg: 'book3.jpg' },
-                { text: "Вернуться к развилке", target: 'page1', bg: 'book1.jpg' }
+                { text: "Совершить ночной налет на селение", target: 'evil2', img: 'book3.jpg' },
+                { text: "Вернуться к развилке", target: 'page1', img: 'book1.jpg' }
             ]
         },
         'evil2': {
@@ -181,10 +200,10 @@
             title: "Путь Зла: Пламя и Страх",
             speaker: "❖ Тёмный хозяин ❖",
             text: "Вы поджигаете чужие амбары так же, как сожгли ваш собственный дом. Глядя на паникующих людей, вы чувствуете странное упоение. Боль уходит, уступая место абсолютной власти над чужими жизнями.<br><br>Вы обрели дурную славу. Что дальше?",
-            bg: "book3.jpg",
+            img: "book3.jpg",
             choices: [
-                { text: "Собрать банду отъявленных головорезов", target: 'ending_evil', bg: 'book3.jpg' },
-                { text: "В начало истории", target: 'page1', bg: 'book1.jpg' }
+                { text: "Собрать банду отъявленных головорезов", target: 'ending_evil', img: 'book3.jpg' },
+                { text: "В начало истории", target: 'page1', img: 'book1.jpg' }
             ]
         },
 
@@ -194,10 +213,10 @@
             title: "Путь Воина: Сталь и Кровь",
             speaker: "❖ Оружейная палата ❖",
             text: "Вы вытаскиваете из-под обломков сгоревшей кузницы тяжелый полуторный меч отца. Металл черен от копоти, но лезвие остро, как бритва. Вы даете себе клятву истреблять разбойников и защищать тех, кто не может постоять за себя.<br><br>Вы выходите на большой тракт в поисках справедливости.",
-            bg: "book4.jpg",
+            img: "book4.jpg",
             choices: [
-                { text: "Вступить в бой с отрядом разбойников у моста", target: 'war2', bg: 'book4.jpg' },
-                { text: "Вернуться к развилке", target: 'page1', bg: 'book1.jpg' }
+                { text: "Вступить в бой с отрядом разбойников у моста", target: 'war2', img: 'book4.jpg' },
+                { text: "Вернуться к развилке", target: 'page1', img: 'book1.jpg' }
             ]
         },
         'war2': {
@@ -205,10 +224,10 @@
             title: "Путь Воина: Испытание клинка",
             speaker: "❖ Кровавый мост ❖",
             text: "Звон стали разносится над рекой. Ваши удары точны и безжалостны к врагам, но вы бережете невинных. Шрамы украшают ваше тело, а имя становится легендой среди простого народа.<br><br>Вы готовы к генеральному сражению.",
-            bg: "book4.jpg",
+            img: "book4.jpg",
             choices: [
-                { text: "Возглавить ополчение против армии захватчиков", target: 'ending_war', bg: 'book4.jpg' },
-                { text: "В начало истории", target: 'page1', bg: 'book1.jpg' }
+                { text: "Возглавить ополчение против армии захватчиков", target: 'ending_war', img: 'book4.jpg' },
+                { text: "В начало истории", target: 'page1', img: 'book1.jpg' }
             ]
         },
 
@@ -218,10 +237,10 @@
             title: "Путь Монаха: Обитель Тишины",
             speaker: "❖ Горный монастырь ❖",
             text: "Оставив пепелище за спиной, вы недели шли на север, пока не добрались до туманных пиков монастыря Семи Ветров. Старый настоятель принял вас в свою обитель. Здесь учат усмирять боль и искать истину в тишине молитв.<br><br>Тяжелые мысли о мести постепенно утихают.",
-            bg: "book5.jpg",
+            img: "book5.jpg",
             choices: [
-                { text: "Посвятить себя суровым тренировкам тела и духа", target: 'monk2', bg: 'book5.jpg' },
-                { text: "Вернуться к развилке", target: 'page1', bg: 'book1.jpg' }
+                { text: "Посвятить себя суровым тренировкам тела и духа", target: 'monk2', img: 'book5.jpg' },
+                { text: "Вернуться к развилке", target: 'page1', img: 'book1.jpg' }
             ]
         },
         'monk2': {
@@ -229,10 +248,10 @@
             title: "Путь Монаха: Внутренний Свет",
             speaker: "❖ Просветление ❖",
             text: "Годы медитаций и тренировок изменили вас. Вы научились слышать движение ветра и управлять собственной энергией ци. Боль утраты превратилась в нерушимый внутренний стержень.<br><br>Монастырь отправляет вас в мир нести исцеление.",
-            bg: "book5.jpg",
+            img: "book5.jpg",
             choices: [
-                { text: "Спуститься в долину помогать страждущим", target: 'ending_monk', bg: 'book5.jpg' },
-                { text: "В начало истории", target: 'page1', bg: 'book1.jpg' }
+                { text: "Спуститься в долину помогать страждущим", target: 'ending_monk', img: 'book5.jpg' },
+                { text: "В начало истории", target: 'page1', img: 'book1.jpg' }
             ]
         },
 
@@ -242,36 +261,38 @@
             title: "Финал: Владыка Пепла",
             speaker: "❖ Тёмная легенда ❖",
             text: "Вы построили свою империю на страхе и руинах. Ни один король больше не смеет пренебрегать вашим именем. Вы отомстили миру, но остались совсем один среди холодных сокровищ.<br><br>Глава I завершена на Пути Зла.",
-            bg: "book3.jpg",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', bg: 'book1.jpg' }]
+            img: "book3.jpg",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', img: 'book1.jpg' }]
         },
         'ending_war': {
             num: "09",
             title: "Финал: Клинок Справедливости",
             speaker: "❖ Герой королевства ❖",
             text: "Ваш меч принес мир выжженным землям. Люди слагают легенды о Безымянном Воине, который поднялся из пепла и спас королевство от гибели.<br><br>Глава I завершена на Пути Воина.",
-            bg: "book4.jpg",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', bg: 'book1.jpg' }]
+            img: "book4.jpg",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', img: 'book1.jpg' }]
         },
         'ending_monk': {
             num: "10",
             title: "Финал: Умиротворение",
             speaker: "❖ Мудрец из тумана ❖",
             text: "Вы обрели то, что не могут купить короли — душевный покой. Ваша мудрость спасает тысячи жизней, а шрамы прошлого стали лишь напоминанием о пройденном уроке.<br><br>Глава I завершена на Пути Монаха.",
-            bg: "book5.jpg",
-            choices: [{ text: 'Пройти историю заново', target: 'page1', bg: 'book1.jpg' }]
+            img: "book5.jpg",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', img: 'book1.jpg' }]
         }
     };
 
-    function changePage(pageId, bgImage) {
+    function changePage(pageId, imgFile) {
         const container = document.getElementById('book-container');
+        const imgElement = document.getElementById('page-image');
+        
         container.style.opacity = 0;
 
         setTimeout(() => {
             const page = pagesData[pageId];
             if (page) {
-                // Меняем картинку фона книги
-                container.style.backgroundImage = `url('${page.bg}')`;
+                // Меняем картинку на правой странице
+                imgElement.style.backgroundImage = `url('${page.img}')`;
 
                 document.getElementById('page-num').innerText = page.num;
                 document.getElementById('page-title').innerText = page.title;
@@ -284,7 +305,7 @@
                 page.choices.forEach(ch => {
                     const btn = document.createElement('button');
                     btn.innerText = ch.text;
-                    btn.onclick = () => changePage(ch.target, ch.bg);
+                    btn.onclick = () => changePage(ch.target, ch.img);
                     choicesBox.appendChild(btn);
                 });
             }
