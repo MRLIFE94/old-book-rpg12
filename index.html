@@ -10,7 +10,6 @@
         }
 
         body {
-            /* Светлый пергаментный фон с теплым дневным свечением */
             background: radial-gradient(circle at center, #f4ebd0 0%, #b8a379 100%);
             margin: 0;
             padding: 0;
@@ -21,7 +20,6 @@
             overflow: hidden;
         }
 
-        /* Обёртка книги */
         .book-wrapper {
             position: relative;
             width: 1150px;
@@ -31,7 +29,6 @@
             filter: drop-shadow(0 20px 40px rgba(60, 45, 25, 0.45));
         }
 
-        /* Книга с фоном book.png */
         .book-spread {
             position: absolute;
             top: 0;
@@ -43,11 +40,10 @@
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
-            padding: 11% 53% 11% 11%; /* Попадание строго по левой странице */
+            padding: 11% 53% 11% 11%;
             transition: opacity 0.25s ease;
         }
 
-        /* Текстовый блок на левой странице */
         .book-page-left {
             position: relative;
             z-index: 2;
@@ -91,7 +87,7 @@
         .story-text {
             font-size: 17px;
             line-height: 1.5;
-            color: #1a120b; /* Темный, контрастный и легко читаемый текст */
+            color: #1a120b;
             text-align: justify;
             max-height: 340px;
             overflow-y: auto;
@@ -100,7 +96,6 @@
             font-weight: 600;
         }
 
-        /* Кнопки выборов */
         .choices-box {
             display: flex;
             flex-direction: column;
@@ -130,7 +125,6 @@
             border-color: #111;
         }
 
-        /* Статистика на закладках */
         .badge-stat {
             position: absolute;
             z-index: 10;
@@ -145,13 +139,11 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Левые закладки */
         #stat-evil-box   { top: 16.5%; left: 5.2%; }
         #stat-war-box    { top: 26.5%; left: 5.2%; }
         #stat-monk-box   { top: 36.5%; left: 5.2%; }
         #stat-rage-box   { top: 46.5%; left: 5.2%; }
 
-        /* Правые закладки */
         #stat-ash-box    { top: 16.5%; right: 5.2%; }
         #stat-steel-box  { top: 26.5%; right: 5.2%; }
         #stat-soul-box   { top: 36.5%; right: 5.2%; }
@@ -161,7 +153,6 @@
 <body>
 
 <div class="book-wrapper">
-    <!-- Счетчики на закладках -->
     <div class="badge-stat" id="stat-evil-box">🖤 Зло: <span id="stat-evil">0</span></div>
     <div class="badge-stat" id="stat-war-box">⚔️ Воин: <span id="stat-war">0</span></div>
     <div class="badge-stat" id="stat-monk-box">📿 Монах: <span id="stat-monk">0</span></div>
