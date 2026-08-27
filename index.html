@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Хроники Этернии — Книга Судеб</title>
+    <title>Пепел и Сталь — Выбор Пути</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -10,7 +10,7 @@
         }
 
         body {
-            /* Светлый, уютный пергаментный фон с мягким дневным свечением */
+            /* Светлый пергаментный фон с теплым дневным свечением */
             background: radial-gradient(circle at center, #f4ebd0 0%, #b8a379 100%);
             margin: 0;
             padding: 0;
@@ -28,23 +28,22 @@
             height: 765px;
             max-width: 96vw;
             max-height: 96vh;
-            /* Красивая объёмная тень вместо черноты */
             filter: drop-shadow(0 20px 40px rgba(60, 45, 25, 0.45));
         }
 
-        /* Сама книга (новый светлый арт-разворот) */
+        /* Книга с фоном book.png */
         .book-spread {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('book-new.jpg');
+            background-image: url('book.png');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
-            padding: 11% 53% 11% 11%; /* Точное попадание по рамке левой страницы */
+            padding: 11% 53% 11% 11%; /* Попадание строго по левой странице */
             transition: opacity 0.25s ease;
         }
 
@@ -70,7 +69,7 @@
 
         .book-title {
             text-align: center;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: bold;
             letter-spacing: 2px;
             color: #2b1d11;
@@ -81,8 +80,8 @@
 
         .speaker-icon {
             text-align: center;
-            font-size: 15px;
-            margin-bottom: 8px;
+            font-size: 14px;
+            margin-bottom: 6px;
             color: #6b5137;
             font-style: italic;
             font-family: 'Cormorant Garamond', serif;
@@ -90,11 +89,11 @@
         }
 
         .story-text {
-            font-size: 18px;
-            line-height: 1.55;
-            color: #1a120b; /* Темный, ультраконтрастный текст */
+            font-size: 17px;
+            line-height: 1.5;
+            color: #1a120b; /* Темный, контрастный и легко читаемый текст */
             text-align: justify;
-            max-height: 350px;
+            max-height: 340px;
             overflow-y: auto;
             padding-right: 5px;
             font-family: 'Cormorant Garamond', serif;
@@ -105,7 +104,7 @@
         .choices-box {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
             margin-top: auto;
         }
 
@@ -113,10 +112,10 @@
             display: block;
             background: rgba(255, 250, 238, 0.95);
             border: 1px solid #7a6148;
-            padding: 8px 12px;
+            padding: 7px 10px;
             color: #21160d;
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             transition: all 0.2s ease;
             border-radius: 4px;
@@ -131,7 +130,7 @@
             border-color: #111;
         }
 
-        /* Статистика на закладках нового арта (по 4 штуки с каждой стороны) */
+        /* Статистика на закладках */
         .badge-stat {
             position: absolute;
             z-index: 10;
@@ -146,157 +145,156 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Левая сторона (4 закладки под иконки арта сверху вниз) */
-        #stat-crown-box  { top: 16.5%; left: 5.2%; }
-        #stat-mask-box   { top: 26.5%; left: 5.2%; }
-        #stat-star-box   { top: 36.5%; left: 5.2%; }
-        #stat-gem-box    { top: 46.5%; left: 5.2%; }
+        /* Левые закладки */
+        #stat-evil-box   { top: 16.5%; left: 5.2%; }
+        #stat-war-box    { top: 26.5%; left: 5.2%; }
+        #stat-monk-box   { top: 36.5%; left: 5.2%; }
+        #stat-rage-box   { top: 46.5%; left: 5.2%; }
 
-        /* Правая сторона (4 закладки под иконки арта сверху вниз) */
-        #stat-throne-box { top: 16.5%; right: 5.2%; }
-        #stat-dragon-box { top: 26.5%; right: 5.2%; }
-        #stat-astrol-box { top: 36.5%; right: 5.2%; }
-        #stat-ring-box   { top: 46.5%; right: 5.2%; }
+        /* Правые закладки */
+        #stat-ash-box    { top: 16.5%; right: 5.2%; }
+        #stat-steel-box  { top: 26.5%; right: 5.2%; }
+        #stat-soul-box   { top: 36.5%; right: 5.2%; }
+        #stat-fate-box   { top: 46.5%; right: 5.2%; }
     </style>
 </head>
 <body>
 
 <div class="book-wrapper">
-    <!-- Левые закладки -->
-    <div class="badge-stat" id="stat-crown-box">👑 <span id="stat-crown">0</span></div>
-    <div class="badge-stat" id="stat-mask-box">🎭 <span id="stat-mask">0</span></div>
-    <div class="badge-stat" id="stat-star-box">✨ <span id="stat-star">0</span></div>
-    <div class="badge-stat" id="stat-gem-box">💎 <span id="stat-gem">0</span></div>
+    <!-- Счетчики на закладках -->
+    <div class="badge-stat" id="stat-evil-box">🖤 Зло: <span id="stat-evil">0</span></div>
+    <div class="badge-stat" id="stat-war-box">⚔️ Воин: <span id="stat-war">0</span></div>
+    <div class="badge-stat" id="stat-monk-box">📿 Монах: <span id="stat-monk">0</span></div>
+    <div class="badge-stat" id="stat-rage-box">🔥 Гнев: <span id="stat-rage">0</span></div>
 
-    <!-- Правые закладки -->
-    <div class="badge-stat" id="stat-throne-box">🪑 <span id="stat-throne">0</span></div>
-    <div class="badge-stat" id="stat-dragon-box">🐉 <span id="stat-dragon">0</span></div>
-    <div class="badge-stat" id="stat-astrol-box">🔭 <span id="stat-astrol">0</span></div>
-    <div class="badge-stat" id="stat-ring-box">💍 <span id="stat-ring">0</span></div>
+    <div class="badge-stat" id="stat-ash-box">🌫️ Пепел: <span id="stat-ash">0</span></div>
+    <div class="badge-stat" id="stat-steel-box">🗡️ Сталь: <span id="stat-steel">0</span></div>
+    <div class="badge-stat" id="stat-soul-box">🕊️ Дух: <span id="stat-soul">0</span></div>
+    <div class="badge-stat" id="stat-fate-box">📜 Рок: <span id="stat-fate">0</span></div>
 
     <div class="book-spread" id="book-container">
         <div class="book-page-left">
             <div class="page-number" id="page-num">01</div>
             <div>
-                <div class="book-title" id="page-title">Пробуждение</div>
-                <div class="speaker-icon" id="page-speaker">❖ Башня Высокого Неба ❖</div>
+                <div class="book-title" id="page-title">Выжженный дом</div>
+                <div class="speaker-icon" id="page-speaker">❖ Пепелище ❖</div>
                 <div class="story-text" id="page-text">
-                    Вы открываете глаза под мерный звон серебряных колоколов. За окнами башни раскинулись золотые равнины Этернии, залитые лучами восходящего солнца. На каменном столе лежит древний фолиант и записка с вашей печатью.<br><br>Сегодня день Великого Совета, и вам предстоит решить судьбу ордена.
+                    Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?
                 </div>
             </div>
             
             <div class="choices-box" id="choices-container">
-                <button onclick="changePage('page2', {crown: 1})">Взять с собой королевский скипетр (Путь Власти)</button>
-                <button onclick="changePage('page3', {star: 1})">Обратиться к древним манускриптам (Путь Мудрости)</button>
-                <button onclick="changePage('page4', {mask: 1})">Надеть маску скрытности (Путь Интриг)</button>
+                <button onclick="changePage('evil1', {evil: 1, rage: 1})">Проклясть этот мир и встать на Путь Зла</button>
+                <button onclick="changePage('war1', {war: 1, steel: 1})">Поднять брошенный меч и выбрать Путь Воина</button>
+                <button onclick="changePage('monk1', {monk: 1, soul: 1})">Уйти в горный монастырь искать покой (Путь Монаха)</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let stats = { crown: 0, mask: 0, star: 0, gem: 0, throne: 0, dragon: 0, astrol: 0, ring: 0 };
+    let stats = { evil: 0, war: 0, monk: 0, rage: 0, ash: 0, steel: 0, soul: 0, fate: 0 };
 
     const pagesData = {
         'page1': {
             num: "01",
-            title: "Пробуждение",
-            speaker: "❖ Башня Высокого Неба ❖",
-            text: "Вы открываете глаза под мерный звон серебряных колоколов. За окнами башни раскинулись золотые равнины Этернии, залитые лучами восходящего солнца. На каменном столе лежит древний фолиант и записка с вашей печатью.<br><br>Сегодня день Великого Совета, и вам предстоит решить судьбу ордена.",
+            title: "Выжженный дом",
+            speaker: "❖ Пепелище ❖",
+            text: "Запах гари ест глаза. От родной деревни остались лишь тлеющие балки, черные остовы печей и тишина, от которой стынет кровь. Вы стоите посреди улицы, где еще вчера жили соседи, смеялся младший брат и пахло свежим хлебом.<br><br>Теперь вы здесь один. В груди вместо сердца — ледяной ком ненависти и пустоты. Что вы сделаете с этим выжившим, но сломанным миром?",
             choices: [
-                { text: "Взять с собой королевский скипетр (Путь Власти)", target: 'page2', stats: { crown: 1 } },
-                { text: "Обратиться к древним манускриптам (Путь Мудрости)", target: 'page3', stats: { star: 1 } },
-                { text: "Надеть маску скрытности (Путь Интриг)", target: 'page4', stats: { mask: 1 } }
+                { text: "Проклясть этот мир и встать на Путь Зла", target: 'evil1', stats: { evil: 1, rage: 1 } },
+                { text: "Поднять брошенный меч и выбрать Путь Воина", target: 'war1', stats: { war: 1, steel: 1 } },
+                { text: "Уйти в горный монастырь искать покой (Путь Монаха)", target: 'monk1', stats: { monk: 1, soul: 1 } }
             ]
         },
-        'page2': {
+
+        /* --- ПУТЬ ЗЛА --- */
+        'evil1': {
             num: "02",
-            title: "Зал Совета",
-            speaker: "❖ Выбор лидера ❖",
-            text: "Тяжелые дубовые двери распахиваются. Лорды провинций смотрят на вас с вызовом. Ваше слово должно прозвучать твердо, иначе власть ускользнет из рук.",
+            title: "Путь Зла: Кровь за Кровь",
+            speaker: "❖ Зов мести ❖",
+            text: "Вы больше не верите в справедливость богов. Если мир позволил сожрать ваш дом, вы сами станете кошмаром для этого мира. Вы находите в грязи ржавый тесак и решаете идти по следу мародеров, не щадя никого на своем пути.<br><br>Первая деревня на вашем пути кажется беспечной.",
             choices: [
-                { text: "Потребовать беспрекословного подчинения", target: 'page5', stats: { throne: 1 } },
-                { text: "Предложить советникам компромисс", target: 'page6', stats: { ring: 1 } }
+                { text: "Совершить ночной налет на селение", target: 'evil2', stats: { evil: 1, ash: 1 } },
+                { text: "Вернуться к развилке", target: 'page1', stats: {} }
             ]
         },
-        'page3': {
+        'evil2': {
             num: "03",
-            title: "Библиотека Звезд",
-            speaker: "❖ Тайные знания ❖",
-            text: "Строки в старой книге начинают светиться мягким синим светом. Вы узнаете о забытом пророчестве, способном изменить баланс сил в королевстве.",
+            title: "Путь Зла: Пламя и Страх",
+            speaker: "❖ Тёмный хозяин ❖",
+            text: "Вы поджигаете чужие амбары так же, как сожгли ваш собственный дом. Глядя на паникующих людей, вы чувствуете странное упоение. Боль уходит, уступая место абсолютной власти над чужими жизнями.<br><br>Вы обрели дурную славу. Что дальше?",
             choices: [
-                { text: "Изучить карту звездного неба", target: 'page7', stats: { astrol: 1 } },
-                { text: "Искать упоминания о драконах Севера", target: 'page8', stats: { dragon: 1 } }
+                { text: "Собрать банду отъявленных головорезов", target: 'ending_evil', stats: { evil: 2 } },
+                { text: "В начало истории", target: 'page1', stats: {} }
             ]
         },
-        'page4': {
+
+        /* --- ПУТЬ ВОИНА --- */
+        'war1': {
             num: "04",
-            title: "Тени Дворца",
-            speaker: "❖ Тайный путь ❖",
-            text: "Вы выбираете скрытный путь через внутренние галереи. В темноте коридоров вас поджидает верный шпион с тревожными вестями из столицы.",
+            title: "Путь Воина: Сталь и Кровь",
+            speaker: "❖ Оружейная палата ❖",
+            text: "Вы вытаскиваете из-под обломков сгоревшей кузницы тяжелый полуторный меч отца. Металл черен от копоти, но лезвие остро, как бритва. Вы даете себе клятву истреблять разбойников и защищать тех, кто не может постоять за себя.<br><br>Вы выходите на большой тракт в поисках справедливости.",
             choices: [
-                { text: "Выслушать донос о заговорщиках", target: 'page9', stats: { gem: 1 } },
-                { text: "Ускользнуть незамеченным в сад", target: 'page1', stats: {} }
+                { text: "Вступить в бой с отрядом разбойников у моста", target: 'war2', stats: { war: 1, steel: 1 } },
+                { text: "Вернуться к развилке", target: 'page1', stats: {} }
             ]
         },
-        'page5': {
+        'war2': {
             num: "05",
-            title: "Железная воля",
-            speaker: "❖ Тронный зал ❖",
-            text: "Ваша уверенность подавляет любые возражения. Лорды склоняют головы, признавая ваше право вести королевство сквозь бурю.",
+            title: "Путь Воина: Испытание клинка",
+            speaker: "❖ Кровавый мост ❖",
+            text: "Звон стали разносится над рекой. Ваши удары точны и безжалостны к врагам, но вы бережете невинных. Шрамы украшают ваше тело, а имя становится легендой среди простого народа.<br><br>Вы готовы к генеральному сражению.",
             choices: [
-                { text: "Возглавить поход к границе", target: 'page10', stats: { throne: 1 } },
-                { text: "Вернуться в начало", target: 'page1', stats: {} }
+                { text: "Возглавить ополчение против армии захватчиков", target: 'ending_war', stats: { war: 2 } },
+                { text: "В начало истории", target: 'page1', stats: {} }
             ]
         },
-        'page6': {
+
+        /* --- ПУТЬ МОНАХА --- */
+        'monk1': {
             num: "06",
-            title: "Путь Согласия",
-            speaker: "❖ Дипломатия ❖",
-            text: "Мирный договор подписан. Союзники улыбаются вам в лицо, но в их глазах читается скрытый расчет.",
+            title: "Путь Монаха: Обитель Тишины",
+            speaker: "❖ Горный монастырь ❖",
+            text: "Оставив пепелище за спиной, вы недели шли на север, пока не добрались до туманных пиков монастыря Семи Ветров. Старый настоятель принял вас в свою обитель. Здесь учат усмирять боль и искать истину в тишине молитв.<br><br>Тяжелые мысли о мести постепенно утихают.",
             choices: [
-                { text: "Укрепить союз кольцом династии", target: 'page10', stats: { ring: 1 } },
-                { text: "Начать сначала", target: 'page1', stats: {} }
+                { text: "Посвятить себя суровым тренировкам тела и духа", target: 'monk2', stats: { monk: 1, soul: 1 } },
+                { text: "Вернуться к развилке", target: 'page1', stats: {} }
             ]
         },
-        'page7': {
+        'monk2': {
             num: "07",
-            title: "Глас Небес",
-            speaker: "❖ Обсерватория ❖",
-            text: "Астролябия указывает на древний артефакт, спрятанный в туманных горах. Знание — ваше главное оружие.",
+            title: "Путь Монаха: Внутренний Свет",
+            speaker: "❖ Просветление ❖",
+            text: "Годы медитаций и тренировок изменили вас. Вы научились слышать движение ветра и управлять собственной энергией ци. Боль утраты превратилась в нерушимый внутренний стержень.<br><br>Монастырь отправляет вас в мир нести исцеление.",
             choices: [
-                { text: "Отправиться на поиски артефакта", target: 'page10', stats: { astrol: 1 } },
-                { text: "В начало", target: 'page1', stats: {} }
+                { text: "Спуститься в долину помогать страждущим", target: 'ending_monk', stats: { monk: 2 } },
+                { text: "В начало истории", target: 'page1', stats: {} }
             ]
         },
-        'page8': {
+
+        /* --- КОНЦОВКИ --- */
+        'ending_evil': {
             num: "08",
-            title: "Дыхание Дракона",
-            speaker: "❖ Северный рубеж ❖",
-            text: "Огромная тень проносится надснежными пиками. Древний страж проснулся, и он ждет достойного собеседника.",
-            choices: [
-                { text: "Приветствовать крылатого зверя", target: 'page10', stats: { dragon: 1 } },
-                { text: "Сдаться", target: 'page1', stats: {} }
-            ]
+            title: "Финал: Владыка Пепла",
+            speaker: "❖ Тёмная легенда ❖",
+            text: "Вы построили свою империю на страхе и руинах. Ни один король больше не смеет пренебрегать вашим именем. Вы отомстили миру, но остались совсем один среди холодных сокровищ.<br><br>Глава I завершена на Пути Зла.",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
         },
-        'page9': {
+        'ending_war': {
             num: "09",
-            title: "Раскрытый заговор",
-            speaker: "❖ Теневая игра ❖",
-            text: "Вы опережаете врагов на шаг. Теперь все нити интриг находятся в ваших руках, а драгоценные камни заговора сияют вашей победой.",
-            choices: [
-                { text: "Завершить первую главу", target: 'page10', stats: { gem: 1 } },
-                { text: "Вернуться назад", target: 'page1', stats: {} }
-            ]
+            title: "Финал: Клинок Справедливости",
+            speaker: "❖ Герой королевства ❖",
+            text: "Ваш меч принес мир выжженным землям. Люди слагают легенды о Безымянном Воине, который поднялся из пепла и спас королевство от гибели.<br><br>Глава I завершена на Пути Воина.",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
         },
-        'page10': {
+        'ending_monk': {
             num: "10",
-            title: "Глава I: Завершена",
-            speaker: "❖ Начало легенды ❖",
-            text: "Первый шаг сделан. Солнце поднимается над Этернией, освещая ваш уникальный путь.<br><br>Ваше приключение в Книге Судеб продолжается!",
-            choices: [
-                { text: 'Пройти историю заново', target: 'page1', stats: {} }
-            ]
+            title: "Финал: Умиротворение",
+            speaker: "❖ Мудрец из тумана ❖",
+            text: "Вы обрели то, что не могут купить короли — душевный покой. Ваша мудрость спасает тысячи жизней, а шрамы прошлого стали лишь напоминанием о пройденном уроке.<br><br>Глава I завершена на Пути Монаха.",
+            choices: [{ text: 'Пройти историю заново', target: 'page1', stats: {} }]
         }
     };
 
@@ -336,7 +334,5 @@
     }
 </script>
 
-</body>
-</html>
 </body>
 </html>
