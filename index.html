@@ -27,6 +27,7 @@
             box-sizing: border-box;
             padding: 40px 50px;
             border: 3px solid #3c2f25;
+            transition: opacity 0.4s ease;
         }
 
         .book-spread::before {
@@ -101,7 +102,7 @@
             margin-top: auto;
         }
 
-        .choices-box a {
+        .choices-box button, .choices-box a {
             display: block;
             background: #d4c4a8;
             border: 1px solid #5c4938;
@@ -112,26 +113,26 @@
             font-size: 16px;
             transition: all 0.2s ease;
             border-radius: 2px;
+            cursor: pointer;
+            font-family: inherit;
         }
 
-        .choices-box a:hover {
+        .choices-box button:hover, .choices-box a:hover {
             background: #2b231d;
             color: #f4ecd8;
             border-color: #111;
         }
 
-        .side-badges-left, .side-badges-right {
+        .side-badges-left {
             position: absolute;
             top: 50%;
+            left: -65px;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             gap: 12px;
             z-index: 20;
         }
-
-        .side-badges-left { left: -65px; }
-        .side-badges-right { right: -65px; }
 
         .badge-item {
             width: 50px;
@@ -157,43 +158,119 @@
 <body>
 
 <div class="side-badges-left">
-    <div class="badge-item" title="Стержень">⚖️ <span>0</span></div>
-    <div class="badge-item" title="Дух">✨ <span>0</span></div>
-    <div class="badge-item" title="Тьма">🌑 <span>0</span></div>
+    <div class="badge-item" title="Стержень">⚖️ <span id="stat-rod">0</span></div>
+    <div class="badge-item" title="Дух">✨ <span id="stat-spirit">0</span></div>
+    <div class="badge-item" title="Тьма">🌑 <span id="stat-dark">0</span></div>
 </div>
 
-<div class="side-badges-right">
-    <div class="badge-item" title="Настройки">⚙️</div>
-    <div class="badge-item" title="Инвентарь">📜</div>
-</div>
-
-<div class="book-spread">
+<div class="book-spread" id="book-container">
     <div class="book-page-left">
-        <div class="page-number">1132</div>
+        <div class="page-number" id="page-num">1132</div>
         <div>
-            <div class="book-title">Темпест</div>
-            <div class="speaker-icon">❖ Корнелий Темпест ❖</div>
-            <div class="story-text">
-                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>
-                У тебя иная судьба.
+            <div class="book-title" id="page-title">Темпест</div>
+            <div class="speaker-icon" id="page-speaker">❖ Корнелий Темпест ❖</div>
+            <div class="story-text" id="page-text">
+                — Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы...
             </div>
         </div>
         
-        <div class="choices-box">
-            <a href="#">Принять свою ношу (Путь Стержня)</a>
-            <a href="#">Уповать на высший смысл (Путь Духа)</a>
-            <a href="#">Отвергнуть этот мир (Путь Тьмы)</a>
+        <div class="choices-box" id="choices-container">
+            <button onclick="changePage('page2', 1, 0, 0)">Принять свою ношу (Путь Стержня)</button>
+            <button onclick="changePage('page3', 0, 1, 0)">Уповать на высший смысл (Путь Духа)</button>
+            <button onclick="changePage('page4', 0, 0, 1)">Отвергнуть этот мир (Путь Тьмы)</button>
         </div>
     </div>
 
     <div class="book-page-right">
         <div style="border: 8px solid #2b231d; padding: 4px; background: #111; max-width: 380px;">
-            <div style="width: 350px; height: 450px; background: #33261d; display: flex; align-items: center; justify-content: center; color: #a38f75; text-align: center; font-style: italic; padding: 20px;">
-                [ Место для иллюстрации-гравюры ]
+            <div style="width: 350px; height: 450px; background: #33261d; display: flex; align-items: center; justify-content: center; color: #a38f75; text-align: center; font-style: italic; padding: 20px;" id="page-illustration">
+                [ Иллюстрация главы ]
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Переменные характеристик игрока
+    let stats = { rod: 0, spirit: 0, dark: 0 };
+
+    // База данных страниц вашей истории (можно легко дополнять сюжет!)
+    const pagesData = {
+        'page1': {
+            num: "1132",
+            title: "Темпест",
+            speaker: "❖ Корнелий Темпест ❖",
+            text: "— Я понимаю, что сейчас тебе страшно. Ты не хочешь умирать и предпочел бы, наверное, родиться обычным человеком подальше от столицы. Жить где-нибудь в Магре, ссориться с братьями, защищать сестру, ходить в школу, дружить с соседским мальчишкой.<br><br>У тебя иная судьба.",
+            choices: [
+                { text: "Принять свою ношу (Путь Стержня)", target: 'page2', r: 1, s: 0, d: 0 },
+                { text: "Уповать на высший смысл (Путь Духа)", target: 'page3', r: 0, s: 1, d: 0 },
+                { text: "Отвергнуть этот мир (Путь Тьмы)", target: 'page4', r: 0, s: 0, d: 1 }
+            ]
+        },
+        'page2': {
+            num: "1133",
+            title: "Путь Стержня",
+            speaker: "❖ Выбор сделан ❖",
+            text: "Вы чувствуете, как внутри вас укрепляется стальной стержень внутренней воли. Мир вокруг перестает казаться размытым кошмаром — реальность обретает четкие, суровые грани.",
+            choices: [
+                { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+            ]
+        },
+        'page3': {
+            num: "1134",
+            title: "Путь Духа",
+            speaker: "❖ Выбор сделан ❖",
+            text: "Разум очищается от суеты. Вы прислушиваетесь к тишине между строк этого мира, и неведомая легкость касается вашего сознания.",
+            choices: [
+                { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+            ]
+        },
+        'page4': {
+            num: "1135",
+            title: "Путь Тьмы",
+            speaker: "❖ Выбор сделан ❖",
+            text: "Тени сгущаются вокруг страниц. Вы отворачиваетесь от света, предпочитая холодную, но абсолютную независимость.",
+            choices: [
+                { text: "Вернуться к началу", target: 'page1', r: 0, s: 0, d: 0 }
+            ]
+        }
+    };
+
+    function changePage(pageId, rAdd, sAdd, dAdd) {
+        // Добавляем очки характеристик
+        stats.rod += rAdd;
+        stats.spirit += sAdd;
+        stats.dark += dAdd;
+
+        document.getElementById('stat-rod').innerText = stats.rod;
+        document.getElementById('stat-spirit').innerText = stats.spirit;
+        document.getElementById('stat-dark').innerText = stats.dark;
+
+        const container = document.getElementById('book-container');
+        container.style.opacity = 0; // Плавное затухание для эффекта перелистывания
+
+        setTimeout(() => {
+            const page = pagesData[pageId];
+            if (page) {
+                document.getElementById('page-num').innerText = page.num;
+                document.getElementById('page-title').innerText = page.title;
+                document.getElementById('page-speaker').innerText = page.speaker;
+                document.getElementById('page-text').innerHTML = page.text;
+
+                const choicesBox = document.getElementById('choices-container');
+                choicesBox.innerHTML = '';
+                
+                page.choices.forEach(ch => {
+                    const btn = document.createElement('button');
+                    btn.innerText = ch.text;
+                    btn.onclick = () => changePage(ch.target, ch.r, ch.s, ch.d);
+                    choicesBox.appendChild(btn);
+                });
+            }
+            container.style.opacity = 1; // Плавное появление новой страницы
+        }, 300);
+    }
+</script>
 
 </body>
 </html>
